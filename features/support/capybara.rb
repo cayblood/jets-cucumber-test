@@ -1,7 +1,15 @@
-# frozen_string_literal: true
-
+require 'active_record'
 require 'capybara'
 require 'capybara/dsl'
+require "byebug"
+require "fileutils"
+require "jets"
+
+ENV['JETS_TEST'] = "1"
+ENV['JETS_ENV'] ||= "test"
+
+abort("The Jets environment is running in production mode!") if Jets.env == "production"
+Jets.boot
 
 Capybara.app = Rack::Builder.new do
   map '/' do

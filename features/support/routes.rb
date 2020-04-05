@@ -1,8 +1,13 @@
-# require 'jets'
-# require 'jets/router/helpers'
+# require 'action_controller'
+# require 'action_dispatch'
 #
-# class RouterTestApp
-#   include Jets::Router::Helpers::NamedRoutesHelper
+# ActionDispatch::Integration::Session.class_eval do
+#   def get_named_route(name)
+#     case name
+#     when 'my profile'
+#       "/users/#{request.session[:user]}"
+#     else
+#       send(name.gsub(' ', '_') + '_path')
+#     end
+#   end
 # end
-
-# require 'config/routes'
